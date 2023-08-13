@@ -31,6 +31,7 @@ games.get("/:id", async (req, res) => {
 // CREATE
 games.post("/", async (req, res) => {
     try {
+        console.log("this is the post req", req.body)
       const game = await createGame(req.body);
       res.json(game);
     } catch (error) {

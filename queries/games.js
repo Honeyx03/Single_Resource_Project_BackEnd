@@ -22,9 +22,10 @@ const getAllGames = async () => {
   // CREATE -> POST
 const createGame = async (game) => {
     try {
+        console.log("this is the game", game)
       const newGame = await db.one(
-        "INSERT INTO games (name, players, category, cards_required,instructions)) VALUES($1, $2, $3, $4) RETURNING *",
-        [game.name, game.players, game.category, game.cards_required,game.instructions]
+        "INSERT INTO games (name, players, category, cards_required,instructions) VALUES($1, $2, $3, $4, $5) RETURNING *",
+        [game.name, game.players, game.category, game.cards_required, game.instructions]
       );
       return newGame;
     } catch (error) {
