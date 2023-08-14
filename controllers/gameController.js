@@ -7,6 +7,7 @@ const {
     deleteGame,
     updateGame,
 } = require("../queries/games");
+const {checkName} = require ("../validations/checkGames")
 
 //INDEX
 games.get("/", async (req, res) => {
@@ -29,7 +30,7 @@ games.get("/:id", async (req, res) => {
     }
   });
 // CREATE
-games.post("/", async (req, res) => {
+games.post("/", checkName ,async (req, res) => {
     try {
         console.log("this is the post req", req.body)
       const game = await createGame(req.body);
@@ -51,7 +52,7 @@ games.post("/", async (req, res) => {
   });
 
 // UPDATE
-games.put("/:id", async (req, res) => {
+games.put("/:id",checkName, async (req, res) => {
   const { id } = req.params;
   const updatedGame = await updateGame(id, req.body);
   res.status(200).json(updatedGame);
